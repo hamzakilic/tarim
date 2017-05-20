@@ -3,7 +3,8 @@
 -- Author: Marcos Kirsch
 
 return function (connection, req, args)
-   dofile("httpserver-header.lc")(connection, 200, args.ext, args.isGzipped)
+   header =dofile("httpserver-header.lc");
+   header(connection, 200, args.ext, args.isGzipped)
    -- Send file in little chunks
    local bytesRemaining = file.list()[args.file]
    -- Chunks larger than 1024 don't work.
@@ -23,5 +24,6 @@ return function (connection, req, args)
    -- print("Finished sending: ", args.file)
    fileHandle:close()
    fileHandle = nil
+   header = nil
    collectgarbage()
 end

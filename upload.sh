@@ -1,15 +1,5 @@
 #! /bin/sh
+nodemcu-uploader -p /dev/ttyUSB10 upload http/index.html
+nodemcu-uploader -p /dev/ttyUSB10 upload http/save.lua
+nodemcu-uploader -p /dev/ttyUSB10 upload http/datetime.lua
 
-for file in  ./**
-do
-	if [ $file != "./http" ]; then
-	nodemcu-uploader -p $1 upload  $(basename $file)
-	fi
-done
-
-for file in  ./http/**
-do
-        if [ $file != "./http" ]; then
-         nodemcu-uploader -p $1 upload "http/"$(basename $file)
-        fi
-done

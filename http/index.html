@@ -1,8 +1,5 @@
-<!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-
-</script>
 <style>
     .row {
         border-bottom: salmon;
@@ -11,10 +8,7 @@
     }
 
     #save {
-           /* margin-top: 10px; */
-    /* margin-right: 10px; */
-    position: relative;
-    /* margin: 10px; */
+    position: relative;    
     top: 50px;
     font-size: large;
     }
@@ -22,14 +16,14 @@
         border: black;
         border-style: solid;
         padding: 5px;
-            border-width: thin;
+        border-width: thin;
     }
     #end{
         border: black;
         border-style: solid;
         padding: 5px;
         margin-left:10px;
-            border-width: thin;
+        border-width: thin;
     }
     .days{
         margin-bottom:5px
@@ -67,200 +61,41 @@
 	
 
     function scheduleHtml(rowid, day,startHour,startMinute,endHour,endMinute,motor1,motor2){
+        days=["","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi","Pazar"];
         valHtml='<div class="row" id="a'+rowid+'" >\
-            <select class="days" id="days">\
-            <option value="1" '+(day==1?' selected':'')+'>Pazartesi</option>\
-                <option value="2" '+(day==2?' selected':'')+'>Salı</option>\
-                <option value="3" '+(day==3?' selected':'')+'>Çarşamba</option>\
-                <option value="4" '+(day==4?' selected':'')+'>Perşembe</option>\
-                <option value="5" '+(day==5?' selected':'')+'>Cuma</option>\
-                <option value="6" '+(day==6?' selected':'')+'>Cumartesi</option>\
-                <option value="7" '+(day==7?' selected':'')+'>Pazar</option>\
-                </select>\
+            <select class="days" id="days">';
+            for(i= 1;i<=7;++i)
+            valHtml +='<option value="'+i+'" '+(day==i?' selected':'')+'>'+days[i]+'</option>';                
+                valHtml+='</select>\
                 <div style="margin-top: 5px">\
                 <span id="start">\
                 <span>Başlangıç</span>\
-                <select class="hour" id="hour">\
-                 <option value="0" '+(startHour==0?' selected':'')+'>00</option>\
-                <option value="1" '+(startHour==1?' selected':'')+'>01</option>\
-                <option value="2" '+(startHour==2?' selected':'')+'>02</option>\
-                <option value="3" '+(startHour==3?' selected':'')+'>03</option>\
-                <option value="4" '+(startHour==4?' selected':'')+'>04</option>\
-                <option value="5" '+(startHour==5?' selected':'')+'>05</option>\
-                <option value="6" '+(startHour==6?' selected':'')+'>06</option>\
-                <option value="7" '+(startHour==7?' selected':'')+'>07</option>\
-                <option value="8" '+(startHour==8?' selected':'')+'>08</option>\
-                <option value="9" '+(startHour==9?' selected':'')+'>09</option>\
-                <option value="10" '+(startHour==10?' selected':'')+'>10</option>\
-                <option value="11" '+(startHour==11?' selected':'')+'>11</option>\
-                <option value="12" '+(startHour==12?' selected':'')+'>12</option>\
-                <option value="13" '+(startHour==13?' selected':'')+'>13</option>\
-                <option value="14" '+(startHour==14?' selected':'')+'>14</option>\
-                <option value="15" '+(startHour==15?' selected':'')+'>15</option>\
-                <option value="16" '+(startHour==16?' selected':'')+'>16</option>\
-                <option value="17" '+(startHour==17?' selected':'')+'>17</option>\
-                <option value="18" '+(startHour==18?' selected':'')+'>18</option>\
-                <option value="19" '+(startHour==19?' selected':'')+'>19</option>\
-                <option value="20" '+(startHour==20?' selected':'')+'>20</option>\
-                <option value="21" '+(startHour==21?' selected':'')+'>21</option>\
-                <option value="22" '+(startHour==22?' selected':'')+'>22</option>\
-                <option value="23" '+(startHour==23?' selected':'')+'>23</option>\
-             </select>\
+                <select class="hour" id="hour">';
+                for(i=0;i<24;++i)
+                 valHtml+='<option value="'+i+'" '+(startHour==i?' selected':'')+'>'+(i<10?('0'+i):i)+'</option>';
+                
+                valHtml+='</select>\
                 <span>:</span>\
-                <select class="minute" id="minute">\
-                 <option value="0" '+(startMinute==0?' selected':'')+'>00</option>\
-                <option value="1" '+(startMinute==1?' selected':'')+'>01</option>\
-                <option value="2" '+(startMinute==2?' selected':'')+'>02</option>\
-                <option value="3" '+(startMinute==3?' selected':'')+'>03</option>\
-                <option value="4" '+(startMinute==4?' selected':'')+'>04</option>\
-                <option value="5" '+(startMinute==5?' selected':'')+'>05</option>\
-                <option value="6" '+(startMinute==6?' selected':'')+'>06</option>\
-                <option value="7" '+(startMinute==7?' selected':'')+'>07</option>\
-                <option value="8" '+(startMinute==8?' selected':'')+'>08</option>\
-                <option value="9" '+(startMinute==9?' selected':'')+'>09</option>\
-                <option value="10" '+(startMinute==10?' selected':'')+'>10</option>\
-                <option value="11" '+(startMinute==11?' selected':'')+'>11</option>\
-                <option value="12" '+(startMinute==12?' selected':'')+'>12</option>\
-                <option value="13" '+(startMinute==13?' selected':'')+'>13</option>\
-                <option value="14" '+(startMinute==14?' selected':'')+'>14</option>\
-                <option value="15" '+(startMinute==15?' selected':'')+'>15</option>\
-                <option value="16" '+(startMinute==16?' selected':'')+'>16</option>\
-                <option value="17" '+(startMinute==17?' selected':'')+'>17</option>\
-                <option value="18" '+(startMinute==18?' selected':'')+'>18</option>\
-                <option value="19" '+(startMinute==19?' selected':'')+'>19</option>\
-                <option value="20" '+(startMinute==20?' selected':'')+'>20</option>\
-                <option value="21" '+(startMinute==21?' selected':'')+'>21</option>\
-                <option value="22" '+(startMinute==22?' selected':'')+'>22</option>\
-                <option value="23" '+(startMinute==23?' selected':'')+'>23</option>\
-                <option value="24" '+(startMinute==24?' selected':'')+'>24</option>\
-                <option value="25" '+(startMinute==25?' selected':'')+'>25</option>\
-                <option value="26" '+(startMinute==26?' selected':'')+'>26</option>\
-                <option value="27" '+(startMinute==27?' selected':'')+'>27</option>\
-                <option value="28" '+(startMinute==28?' selected':'')+'>28</option>\
-                <option value="29" '+(startMinute==29?' selected':'')+'>29</option>\
-                <option value="30" '+(startMinute==30?' selected':'')+'>30</option>\
-                <option value="31" '+(startMinute==31?' selected':'')+'>31</option>\
-                <option value="32" '+(startMinute==32?' selected':'')+'>32</option>\
-                <option value="33" '+(startMinute==33?' selected':'')+'>33</option>\
-                <option value="34" '+(startMinute==34?' selected':'')+'>34</option>\
-                <option value="35" '+(startMinute==35?' selected':'')+'>35</option>\
-                <option value="36" '+(startMinute==36?' selected':'')+'>36</option>\
-                <option value="37" '+(startMinute==37?' selected':'')+'>37</option>\
-                <option value="38" '+(startMinute==38?' selected':'')+'>38</option>\
-                <option value="39" '+(startMinute==39?' selected':'')+'>39</option>\
-                <option value="40" '+(startMinute==40?' selected':'')+'>40</option>\
-                <option value="41" '+(startMinute==41?' selected':'')+'>41</option>\
-                <option value="42" '+(startMinute==42?' selected':'')+'>42</option>\
-                <option value="43" '+(startMinute==43?' selected':'')+'>43</option>\
-                <option value="44" '+(startMinute==44?' selected':'')+'>44</option>\
-                <option value="45" '+(startMinute==45?' selected':'')+'>45</option>\
-                <option value="46" '+(startMinute==46?' selected':'')+'>46</option>\
-                <option value="47" '+(startMinute==47?' selected':'')+'>47</option>\
-                <option value="48" '+(startMinute==48?' selected':'')+'>48</option>\
-                <option value="49" '+(startMinute==49?' selected':'')+'>49</option>\
-                <option value="50" '+(startMinute==50?' selected':'')+'>50</option>\
-                <option value="51" '+(startMinute==51?' selected':'')+'>51</option>\
-                <option value="52" '+(startMinute==52?' selected':'')+'>52</option>\
-                <option value="53" '+(startMinute==53?' selected':'')+'>53</option>\
-                <option value="54" '+(startMinute==54?' selected':'')+'>54</option>\
-                <option value="55" '+(startMinute==55?' selected':'')+'>55</option>\
-                <option value="56" '+(startMinute==56?' selected':'')+'>56</option>\
-                <option value="57" '+(startMinute==57?' selected':'')+'>57</option>\
-                <option value="58" '+(startMinute==58?' selected':'')+'>58</option>\
-                <option value="59" '+(startMinute==59?' selected':'')+'>59</option>\
-                </select>\
+                <select class="minute" id="minute">';
+                 for(i=0;i<60;++i)
+                 valHtml+='<option value="'+i+'" '+(startMinute==i?' selected':'')+'>'+(i<10?('0'+i):i)+'</option>';
+                
+                valHtml+='</select>\
                 </span>\
                 <span id="end">\
                 <span>Bitiş</span>\
-                <select class="hour" id="hour">\
-                 <option value="0" '+(endHour==0?' selected':'')+'>00</option>\
-                <option value="1" '+(endHour==1?' selected':'')+'>01</option>\
-                <option value="2" '+(endHour==2?' selected':'')+'>02</option>\
-                <option value="3" '+(endHour==3?' selected':'')+'>03</option>\
-                <option value="4" '+(endHour==4?' selected':'')+'>04</option>\
-                <option value="5" '+(endHour==5?' selected':'')+'>05</option>\
-                <option value="6" '+(endHour==6?' selected':'')+'>06</option>\
-                <option value="7" '+(endHour==7?' selected':'')+'>07</option>\
-                <option value="8" '+(endHour==8?' selected':'')+'>08</option>\
-                <option value="9" '+(endHour==9?' selected':'')+'>09</option>\
-                <option value="10" '+(endHour==10?' selected':'')+'>10</option>\
-                <option value="11" '+(endHour==11?' selected':'')+'>11</option>\
-                <option value="12" '+(endHour==12?' selected':'')+'>12</option>\
-                <option value="13" '+(endHour==13?' selected':'')+'>13</option>\
-                <option value="14" '+(endHour==14?' selected':'')+'>14</option>\
-                <option value="15" '+(endHour==15?' selected':'')+'>15</option>\
-                <option value="16" '+(endHour==16?' selected':'')+'>16</option>\
-                <option value="17" '+(endHour==17?' selected':'')+'>17</option>\
-                <option value="18" '+(endHour==18?' selected':'')+'>18</option>\
-                <option value="19" '+(endHour==19?' selected':'')+'>19</option>\
-                <option value="20" '+(endHour==20?' selected':'')+'>20</option>\
-                <option value="21" '+(endHour==21?' selected':'')+'>21</option>\
-                <option value="22" '+(endHour==22?' selected':'')+'>22</option>\
-                <option value="23" '+(endHour==23?' selected':'')+'>23</option>\
-             </select>\
+                <select class="hour" id="hour">';
+
+                 for(i=0;i<24;++i)
+                 valHtml+='<option value="'+i+'" '+(endHour==i?' selected':'')+'>'+(i<10?('0'+i):i)+'</option>';
+                 
+             valHtml+='</select>\
                 <span>:</span>\
-                <select class="minute" id="minute">\
-                 <option value="0" '+(endMinute==0?' selected':'')+'>00</option>\
-                <option value="1" '+(endMinute==1?' selected':'')+'>01</option>\
-                <option value="2" '+(endMinute==2?' selected':'')+'>02</option>\
-                <option value="3" '+(endMinute==3?' selected':'')+'>03</option>\
-                <option value="4" '+(endMinute==4?' selected':'')+'>04</option>\
-                <option value="5" '+(endMinute==5?' selected':'')+'>05</option>\
-                <option value="6" '+(endMinute==6?' selected':'')+'>06</option>\
-                <option value="7" '+(endMinute==7?' selected':'')+'>07</option>\
-                <option value="8" '+(endMinute==8?' selected':'')+'>08</option>\
-                <option value="9" '+(endMinute==9?' selected':'')+'>09</option>\
-                <option value="10" '+(endMinute==10?' selected':'')+'>10</option>\
-                <option value="11" '+(endMinute==11?' selected':'')+'>11</option>\
-                <option value="12" '+(endMinute==12?' selected':'')+'>12</option>\
-                <option value="13" '+(endMinute==13?' selected':'')+'>13</option>\
-                <option value="14" '+(endMinute==14?' selected':'')+'>14</option>\
-                <option value="15" '+(endMinute==15?' selected':'')+'>15</option>\
-                <option value="16" '+(endMinute==16?' selected':'')+'>16</option>\
-                <option value="17" '+(endMinute==17?' selected':'')+'>17</option>\
-                <option value="18" '+(endMinute==18?' selected':'')+'>18</option>\
-                <option value="19" '+(endMinute==19?' selected':'')+'>19</option>\
-                <option value="20" '+(endMinute==20?' selected':'')+'>20</option>\
-                <option value="21" '+(endMinute==21?' selected':'')+'>21</option>\
-                <option value="22" '+(endMinute==22?' selected':'')+'>22</option>\
-                <option value="23" '+(endMinute==23?' selected':'')+'>23</option>\
-                <option value="24" '+(endMinute==24?' selected':'')+'>24</option>\
-                <option value="25" '+(endMinute==25?' selected':'')+'>25</option>\
-                <option value="26" '+(endMinute==26?' selected':'')+'>26</option>\
-                <option value="27" '+(endMinute==27?' selected':'')+'>27</option>\
-                <option value="28" '+(endMinute==28?' selected':'')+'>28</option>\
-                <option value="29" '+(endMinute==29?' selected':'')+'>29</option>\
-                <option value="30" '+(endMinute==30?' selected':'')+'>30</option>\
-                <option value="31" '+(endMinute==31?' selected':'')+'>31</option>\
-                <option value="32" '+(endMinute==32?' selected':'')+'>32</option>\
-                <option value="33" '+(endMinute==33?' selected':'')+'>33</option>\
-                <option value="34" '+(endMinute==34?' selected':'')+'>34</option>\
-                <option value="35" '+(endMinute==35?' selected':'')+'>35</option>\
-                <option value="36" '+(endMinute==36?' selected':'')+'>36</option>\
-                <option value="37" '+(endMinute==37?' selected':'')+'>37</option>\
-                <option value="38" '+(endMinute==38?' selected':'')+'>38</option>\
-                <option value="39" '+(endMinute==39?' selected':'')+'>39</option>\
-                <option value="40" '+(endMinute==40?' selected':'')+'>40</option>\
-                <option value="41" '+(endMinute==41?' selected':'')+'>41</option>\
-                <option value="42" '+(endMinute==42?' selected':'')+'>42</option>\
-                <option value="43" '+(endMinute==43?' selected':'')+'>43</option>\
-                <option value="44" '+(endMinute==44?' selected':'')+'>44</option>\
-                <option value="45" '+(endMinute==45?' selected':'')+'>45</option>\
-                <option value="46" '+(endMinute==46?' selected':'')+'>46</option>\
-                <option value="47" '+(endMinute==47?' selected':'')+'>47</option>\
-                <option value="48" '+(endMinute==48?' selected':'')+'>48</option>\
-                <option value="49" '+(endMinute==49?' selected':'')+'>49</option>\
-                <option value="50" '+(endMinute==50?' selected':'')+'>50</option>\
-                <option value="51" '+(endMinute==51?' selected':'')+'>51</option>\
-                <option value="52" '+(endMinute==52?' selected':'')+'>52</option>\
-                <option value="53" '+(endMinute==53?' selected':'')+'>53</option>\
-                <option value="54" '+(endMinute==54?' selected':'')+'>54</option>\
-                <option value="55" '+(endMinute==55?' selected':'')+'>55</option>\
-                <option value="56" '+(endMinute==56?' selected':'')+'>56</option>\
-                <option value="57" '+(endMinute==57?' selected':'')+'>57</option>\
-                <option value="58" '+(endMinute==58?' selected':'')+'>58</option>\
-                <option value="59" '+(endMinute==59?' selected':'')+'>59</option>\
-                </select>\
+                <select class="minute" id="minute">';
+
+                 for(i=0;i<60;++i)
+                 valHtml+='<option value="'+i+'" '+(endMinute==i?' selected':'')+'>'+(i<10?('0'+i):i)+'</option>';
+                valHtml+='</select>\
                 </span>\
                 <div style="margin-top:10px">\
                  <span>1. motor</span>\
@@ -278,7 +113,10 @@
     }
     counter = 0 ;
     function addnew(){
-       
+        if(document.querySelectorAll('.row').length>40){
+            alert("40 taneden fazla kayıt edemezsiniz");
+            return;
+        }
         counter++;
         html = scheduleHtml(counter);
         document.querySelector('#saatler').innerHTML+=html;
@@ -293,11 +131,9 @@
         items=[];
         arr.forEach((item,index)=>{
             items.push(calculate(item));
-        });
-        final = {};
-        final.update=new Date().toLocaleString();
-        final.items = items;
-        resultStr= JSON.stringify(final);
+        });      
+        
+        resultStr= JSON.stringify(items);
         postAjax('/save.lua', resultStr, function(data){ alert('kaydedildi') });
         return resultStr;
 
@@ -308,32 +144,80 @@
     }
     function calculate(rownumber){
         sch = {};
-        sch.day =  document.querySelector("#"+rownumber+" > #days > option:checked").value;
-        sch.sHour = document.querySelector("#"+rownumber+ '> div > #start > #hour option:checked').value;
-        sch.sMinute = document.querySelector("#"+rownumber+ '> div > #start > #minute option:checked').value;
-        sch.eHour = document.querySelector("#"+rownumber+ '> div > #end > #hour option:checked').value
-        sch.eMinute = document.querySelector("#"+rownumber+ '> div > #end > #minute option:checked').value
+        sch.d =  document.querySelector("#"+rownumber+" > #days > option:checked").value;
+        sch.sH = document.querySelector("#"+rownumber+ '> div > #start > #hour option:checked').value;
+        sch.sM = document.querySelector("#"+rownumber+ '> div > #start > #minute option:checked').value;
+        sch.eH = document.querySelector("#"+rownumber+ '> div > #end > #hour option:checked').value
+        sch.eM = document.querySelector("#"+rownumber+ '> div > #end > #minute option:checked').value
         sch.m1 = document.querySelector("#"+rownumber+' > div > div > #motor1').checked?1:0;
         sch.m2 = document.querySelector("#"+rownumber+' > div > div > #motor2').checked?1:0;
         return sch;
+    }
+
+    function datetime()
+    {
+        date =new Date(clock.getTime() + 1000);
+        year = date.getFullYear();
+        month = date.getMonth();
+        
+        d = date.getDate();
+        day = date.getDay();        
+        h = date.getHours();
+        if(h<10)
+        {
+                h = "0"+h;
+        }
+        m = date.getMinutes();
+        if(m<10)
+        {
+                m = "0"+m;
+        }
+        s = date.getSeconds();
+        if(s<10)
+        {
+                s = "0"+s;
+        }
+        result = year+'/'+month+'/'+d+' '+h+':'+m+':'+s+' >>>>>'+clock.day;
+        document.querySelector("h6").innerText = result;
+        tmp = clock.day;
+        clock=date;
+        clock.day = tmp;
+        return true;
     }
 
     window.onload = function() {
         getAjax('/config.json', function(data){
 	    var json = JSON.parse(data);
 	    console.log(json);
-        json.items.forEach((item,index)=>{
+        json.forEach((item,index)=>{
             counter++;
-            html = scheduleHtml(counter,item.day,item.sHour,item.sMinute,item.eHour,item.eMinute,item.m1,item.m2);
+            html = scheduleHtml(counter,item.d,item.sH,item.sM,item.eH,item.eM,item.m1,item.m2);
             document.querySelector('#saatler').innerHTML+=html;
         });
+
+        
 	});
+     clock = undefined;
+     getAjax('/datetime.lua', function(data){
+	    var json = JSON.parse(data);
+	    console.log(json);
+        
+        clock = new Date(2000+json.year,json.month,json.date,json.hour,json.minute,json.second);
+        clock.day = json.day;
+        setInterval('datetime()', 1000);
+        
+        
+	});
+
+
 };
    
 </script>
 
 <body>
-    <h1>Saatler</h1>
+    <h6></h6>
+    
+    <h2>Saatler</h2>
     <div id="saatler">
         
     </div>

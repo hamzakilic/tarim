@@ -34,6 +34,8 @@ return function (port)
                   connection:close()
                   connectionThread = nil
                end
+               fileServeFunction=nil;
+               collectgarbage();
             end)
 
             local BufferedConnectionClass = dofile("httpserver-connection.lc")
@@ -48,25 +50,11 @@ return function (port)
             local uri = req.uri
             local fileServeFunction = nil
 
-            if #(uri.file) > 32 then
-               -- nodemcu-firmware cannot handle long filenames.
-               uri.args = {code = 400, errorString = "Bad Request", logFunction = log}
-               fileServeFunction = dofile("httpserver-error.lc")
-            else
+            
                local fileExists = file.open(uri.file, "r")
                file.close()
 
-               if not fileExists then
-                  -- gzip check
-                  fileExists = file.open(uri.file .. ".gz", "r")
-                  file.close()
-
-                  if fileExists then
-                     --print("gzip variant exists, serving that one")
-                     uri.file = uri.file .. ".gz"
-                     uri.isGzipped = true
-                  end
-               end
+               
 
                if not fileExists then
                   uri.args = {code = 404, errorString = "Not Found", logFunction = log}
@@ -82,13 +70,13 @@ return function (port)
                      fileServeFunction = dofile("httpserver-error.lc")
                   end
                end
-            end
+            
             startServing(fileServeFunction, connection, req, uri.args)
          end
 
          local function onReceive(connection, payload)
             collectgarbage()
-            local conf = dofile("httpserver-conf.lc")
+            
             local auth
             local user = "Anonymous"
 
@@ -109,12 +97,11 @@ return function (port)
             collectgarbage()
 
             -- parse payload and decide what to serve.
-            local req = dofile("httpserver-request.lc")(payload)
+            local reqFile =dofile("httpserver-request.lc");
+            local req = reqFile(payload);
             log(connection, req.method, req.request)
-            if conf.auth.enabled then
-               auth = dofile("httpserver-basicauth.lc")
-               user = auth.authenticate(payload) -- authenticate returns nil on failed auth
-            end
+            reqFile = nil;
+            collectgarbage()
 
             if user and req.methodIsValid and (req.method == "GET" or req.method == "POST" or req.method == "PUT") then
                handleRequest(connection, req)
@@ -130,6 +117,7 @@ return function (port)
                end
                startServing(fileServeFunction, connection, req, args)
             end
+            
          end
 
          local function onSent(connection, payload)
